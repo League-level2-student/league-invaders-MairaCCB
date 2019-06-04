@@ -1,12 +1,14 @@
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-public class LeagueInvaders {
+public class LeagueInvaders implements KeyListener {
 	JFrame frame;
 	GamePanel gamePanel;
-	final int WIDTH = 500;
-	final int HEIGHT = 800;
+	static final int WIDTH = 500;
+	static final int HEIGHT = 800;
 	
 	public static void main(String[] args) {
 		LeagueInvaders game = new LeagueInvaders();
@@ -29,6 +31,25 @@ public class LeagueInvaders {
 		frame.getContentPane().setPreferredSize(new Dimension(WIDTH, HEIGHT));
         frame.pack();
         gamePanel.startGame();
+        frame.addKeyListener(gamePanel);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
