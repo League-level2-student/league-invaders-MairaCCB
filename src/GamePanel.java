@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	Font titleFont = new Font("Ariel", Font.PLAIN, 48);
+	
 
 	public void updateMenuState() {
 
@@ -32,7 +35,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-
+		//g.setFont(titleFont);
+		//g.drawString("text", Font.PLAIN, 48);
+		//g.setColor(Color.BLACK);
 	}
 
 	public void drawGameState(Graphics g) {
@@ -42,6 +47,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
+		//text for gameover screen
 	}
 
 	public GamePanel() {
@@ -74,15 +80,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		if (currentState == MENU_STATE) {
+		if (currentState == MENU_STATE) { // blue
 			drawMenuState(g);
 		}
-
-		else if (currentState == GAME_STATE) {
+		
+		else if (currentState == GAME_STATE) { // black
 			drawGameState(g);
 		}
 
-		else if (currentState == END_STATE) {
+		else if (currentState == END_STATE) { // red
 			drawEndState(g);
 		}
 	}
@@ -90,20 +96,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		// System.out.println("hi");
+		// System.out.println("a");
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode())
 
-		System.out.println("hello");
+		if (e.getKeyCode() == 10) {
+			currentState ++;
+			
+			if(currentState > END_STATE) {
+				currentState = MENU_STATE;
+			}
+			
+		}
+
+		// System.out.println("b");
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		// System.out.println("hii");
+		// System.out.println("c");
 	}
 }

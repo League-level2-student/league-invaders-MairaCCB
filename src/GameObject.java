@@ -26,3 +26,4 @@ public class GameObject {
 		
 	}
 }
+//I ENDED ON Pt.7 #3 but I didn't finish Pt. 6 #10 and 11
