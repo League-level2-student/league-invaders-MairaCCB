@@ -10,14 +10,21 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
-	Timer timer = new Timer(1000 / 6, this);
+	Timer frameDraw = new Timer(1000 / 6, this);
 	GameObject gameObject;
-
+	Rocketship rocketship = new Rocketship(250, 700, 50, 50);
+	
+	
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	Font titleFont = new Font("Ariel", Font.PLAIN, 48);
+	Font startFont = new Font("Ariel", Font.PLAIN, 24);
+	Font spaceFont = new Font("Ariel", Font.PLAIN, 24);
+	Font gameOverFont = new Font("Ariel", Font.PLAIN, 48);
+	Font enemiesFont = new Font("Ariel", Font.PLAIN, 24);
+	Font restartFont = new Font("Ariel", Font.PLAIN, 24);
 	
 
 	public void updateMenuState() {
@@ -35,23 +42,47 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
-		//g.setFont(titleFont);
-		//g.drawString("text", Font.PLAIN, 48);
-		//g.setColor(Color.BLACK);
+		
+		g.setColor(Color.YELLOW);
+		g.setFont(titleFont);
+		g.drawString("LEAGUE INVADERS", 50, 200);
+		
+		g.setFont(startFont);
+		g.drawString("Press ENTER to start", 150, 350);
+		
+		g.setFont(spaceFont);
+		g.drawString("Press SPACE for instructions", 100, 500);
+		
 	}
 
 	public void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
-
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		
+		rocketship.draw(g);
+		
 	}
 
 	public void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
-		//text for gameover screen
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(gameOverFont);
+		g.drawString("Game Over", 125, 200);
+		
+		g.setFont(enemiesFont);
+		g.drawString("You killed 0 enemies", 130, 350);
+		
+		g.setFont(restartFont);
+		g.drawString("Press ENTER to restart", 125, 500);
+		
+		
 	}
 
 	public GamePanel() {
 		// gameObject = new GameObject(10, 10, 250, 600);
+		
 	}
 
 	@Override
@@ -75,7 +106,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void startGame() {
-		timer.start();
+		frameDraw.start();
 	}
 
 	@Override
@@ -103,16 +134,39 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 
-		if (e.getKeyCode() == 10) {
-			currentState ++;
-			
-			if(currentState > END_STATE) {
-				currentState = MENU_STATE;
-			}
-			
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		    if (currentState == END_STATE) {
+		        currentState = MENU_STATE;
+		    } else {
+		        currentState++;
+		    }
+		}   
+		
+		else if (e.getKeyCode() == KeyEvent.VK_UP) {
+		    System.out.println("UP");
+		    rocketship.up();
+		    
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		    System.out.println("DOWN");
+		    rocketship.down();
+		    
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		    System.out.println("LEFT");
+		    rocketship.left();
+		    
+		}
+		
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		    System.out.println("RIGHT");
+		    rocketship.right();
+		    
 		}
 
-		// System.out.println("b");
+		
 	}
 
 	@Override
