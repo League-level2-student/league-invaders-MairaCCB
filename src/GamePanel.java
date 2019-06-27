@@ -135,39 +135,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (currentState == END_STATE) {
 				currentState = MENU_STATE;
 			} else {
-				currentState++;
+				currentState ++;
 			}
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_UP) {
-			System.out.println("UP");
 
-			if (rocketship.getX() <= 0) {
+			if (rocketship.getY() >= 10) {
 				rocketship.up();
 			}
 
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("DOWN");
 			
-			if (rocketship.getX() <= 800) {
+			if (rocketship.getY() <= 740) {
 				rocketship.down();
 			}
 
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			System.out.println("LEFT");
-			if(rocketship.getY() <= 0) {
+		
+			if(rocketship.getX() >= 10) {
 		    	rocketship.left();
 		    }
 
 		}
 
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			System.out.println("RIGHT");
-			if(rocketship.getY() <= 500) {
+			
+			if(rocketship.getX() <= 440) {
 		    	rocketship.right();
 		    }
 
@@ -178,6 +176,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		// System.out.println("c");
+		
 	}
 }
